@@ -71,6 +71,7 @@ struct ContentView: View {
                             else{
                                 let result = await openImmersiveSpace123(id : "virtualMuesum")
                                 
+                                
                                 openWindow123(id : "CloseImmersiveBtn")
                                 
                                 if result == .opened{
