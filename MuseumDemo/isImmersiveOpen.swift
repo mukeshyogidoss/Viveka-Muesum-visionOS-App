@@ -6,13 +6,11 @@
 //
 
 import SwiftUI
+import Combine
 
-struct isImmersiveOpen: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
 
-#Preview {
-    isImmersiveOpen()
+@MainActor
+final class AppState : ObservableObject {
+    @Published var isMuesumOpen : Bool = false
+    
 }

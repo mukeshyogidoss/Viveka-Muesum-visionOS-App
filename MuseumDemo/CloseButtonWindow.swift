@@ -8,8 +8,22 @@
 import SwiftUI
 
 struct CloseButtonWindow: View {
+    @EnvironmentObject private var appState : AppState
+    @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace123
+    
+    @Environment(\.dismissWindow) var dismissWindow123
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button("Closeee the Immersive "){
+            Task{
+                
+                appState.isMuesumOpen = false
+                await dismissImmersiveSpace123()
+                dismissWindow123(id : "CloseImmersiveBtn")
+                 
+            }
+        }
+        .background(.red)
     }
 }
 

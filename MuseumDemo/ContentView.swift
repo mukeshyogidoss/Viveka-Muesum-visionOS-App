@@ -12,8 +12,12 @@ import RealityKitContent
 struct ContentView: View {
     @Environment(\.openImmersiveSpace) var openImmersiveSpace123
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace123
+    @Environment(\.dismissWindow) var dismissWindow123
     
-    @State private var isMuesumOpen : Bool = false
+    
+    @Environment(\.openWindow) var openWindow123
+    @EnvironmentObject private var appState : AppState
+
     
     let bgMainColor1 = Color(red: 227/255, green: 217/255, blue: 195/255)
     let bgMainColor2 = Color(red: 235/255, green: 221/255, blue: 190/255)
@@ -46,28 +50,32 @@ struct ContentView: View {
                     Image("Holy Trio")
                         .resizable()
                         .scaledToFit()
-                        .frame(width : width * 0.36 , height : height * 0.479 )
+                        .frame(width : width * 0.40 , height : height * 0.400 )
                     //                    .background(.gray)
                     
-//                    Text("Step into the Vivekananda Museum in 3D. Explore, interact, and experience its heritage like never before.")
-//                        .frame(width : width * 0.5)
-//                        .font(.system(size: width * 0.017))
-//                        .multilineTextAlignment(.center)
-//                        .foregroundColor(headerTxtColor)
+                    Text("Step into the Vivekananda Museum in 3D. Explore, interact, and experience its heritage like never before.")
+                        .frame(width : width * 0.5)
+                        .font(.system(size: width * 0.020))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(headerTxtColor)
                     
                     
                     
-                    Button(isMuesumOpen ? "Close Museum" : "Open Museum"){
+                    Button(appState.isMuesumOpen ? "Close Museum" : "Open Museum"){
                         Task{
-                            if isMuesumOpen{
+                            if appState.isMuesumOpen{
                                 await dismissImmersiveSpace123()
-                                isMuesumOpen = false
+                                
+                                appState.isMuesumOpen = false
                             }
                             else{
                                 let result = await openImmersiveSpace123(id : "virtualMuesum")
                                 
+                                openWindow123(id : "CloseImmersiveBtn")
+                                
                                 if result == .opened{
-                                    isMuesumOpen = true
+                                    appState.isMuesumOpen = true
+                                    dismissWindow123()
                                 }
                             }
                         }
@@ -76,6 +84,8 @@ struct ContentView: View {
                     
                 }
                 .padding()
+                
+                    
             }
         }
     }
