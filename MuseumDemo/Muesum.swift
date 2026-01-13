@@ -21,13 +21,13 @@ struct Muesum: View {
 }
 
 private func OwnMuseum()-> Entity? {
-    let outerSphere = MeshResource.generateSphere(radius: 200)
+    let outerSphere = MeshResource.generateSphere(radius: 20)
     var museumMaterial = UnlitMaterial()
     
     do{
         let texture  = try TextureResource.load(named : "Museum Hall")
         museumMaterial.color = .init(
-                    tint: UIColor(white: 1.5, alpha: 1.0), // brighten here ✅,
+                    tint: UIColor(white: 1.5, alpha: 1.0), // brighten here
                    texture: .init(texture)
                   
                )

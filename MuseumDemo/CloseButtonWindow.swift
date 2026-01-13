@@ -17,8 +17,8 @@ struct CloseButtonWindow: View {
         Button("Closeee the Immersive "){
             Task{
                 
-                appState.isMuesumOpen = false
-                await  dismissImmersiveSpace123() 
+                appState.isMuesumOpen.toggle()
+                await  dismissImmersiveSpace123()
                 dismissWindow123(id : "CloseImmersiveBtn")
                  
             }

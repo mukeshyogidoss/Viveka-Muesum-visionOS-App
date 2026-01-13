@@ -25,6 +25,10 @@ struct ContentView: View {
 
 
     let headerTxtColor = Color(red: 102/255, green: 87/255, blue: 60/255)
+    
+    
+    @State private var tapping : Bool = false
+    @State private var isHovering : Bool = false
 
 
 
@@ -50,19 +54,21 @@ struct ContentView: View {
                     Image("Holy Trio")
                         .resizable()
                         .scaledToFit()
-                        .frame(width : width * 0.40 , height : height * 0.400 )
+                        .frame(width : width * 0.48 , height : height * 0.400 )
                     //                    .background(.gray)
                     
                     Text("Step into the Vivekananda Museum in 3D. Explore, interact, and experience its heritage like never before.")
-                        .frame(width : width * 0.5)
-                        .font(.system(size: width * 0.020))
+                        .frame(width : width * 0.6)
+                        .font(.system(size: width * 0.024))
                         .multilineTextAlignment(.center)
                         .foregroundColor(headerTxtColor)
+                        .padding(.bottom , 40)
                     
                     
                     
                     Button(appState.isMuesumOpen ? "Close Museum" : "Open Museum"){
                         Task{
+                          
                             if appState.isMuesumOpen{
                                 await dismissImmersiveSpace123()
                                 
@@ -72,15 +78,32 @@ struct ContentView: View {
                                 let result = await openImmersiveSpace123(id : "virtualMuesum")
                                 
                                 
-                                openWindow123(id : "CloseImmersiveBtn")
+//                                openWindow123(id : "CloseImmersiveBtn")
                                 
                                 if result == .opened{
                                     appState.isMuesumOpen = true
-                                    dismissWindow123()
+                                    
                                 }
                             }
                         }
+                        
                     }
+                    .hoverEffect()
+                    .scaleEffect(tapping ? 0.9 : 1.2    )
+                    .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged({ value in
+                                    withAnimation(.smooth(duration: 0.2)) {
+                                        tapping = true
+                                    }
+                                })
+                                .onEnded({ value in
+                                    withAnimation(.bouncy(duration: 0.5)) {
+                                        tapping = false
+                                    }
+                                })
+                        )
+                        
                     
                     
                 }
