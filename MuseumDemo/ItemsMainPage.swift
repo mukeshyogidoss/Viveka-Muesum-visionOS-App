@@ -17,6 +17,15 @@ struct ItemsMainPage: View {
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace123
     @Environment(\.dismissWindow) var dismissWindow123
     @Environment(\.openWindow) var openWindow123
+    
+    func simpleButton(_ btnTitle: String, _ modelName: String) -> some View {
+        Button(btnTitle) {
+            selectedItem123.selectedItem = modelName
+            openWindow123(id: "Seperate3DObject")
+        }
+       
+    }
+
    
     
     
@@ -24,34 +33,25 @@ struct ItemsMainPage: View {
     var body: some View {
         
         VStack{
-            Button("Cat"){
-              
-                    selectedItem123.selectedItem = "Cat"
-                    openWindow123(id : "Seperate3DObject" )
-               
-            }
             
-            Button("Chamelon"){
+//            Button("Cat 🐱"){
+//              
+//                    selectedItem123.selectedItem = "Cat"
+//                    openWindow123(id : "Seperate3DObject" )
+//               
+//            }
             
-                    selectedItem123.selectedItem = "Chamelon"
-                    openWindow123(id : "Seperate3DObject" )
-                
-            }
+
             
-            Button("Sea Horse"){
-               
-                    selectedItem123.selectedItem = "seaHorse"
-                    openWindow123(id : "Seperate3DObject" )
-                }
-            
-            
-            Button("Soccer"){
-            
-                    selectedItem123.selectedItem = "soccer"
-                    openWindow123(id : "Seperate3DObject" )
-               
-            }
+            simpleButton("Cat 🐱" , "Cat")
+            simpleButton("Chamelon 🦎" , "Chamelon")
+            simpleButton("Sea Horse 🐙" , "seaHorse")
+            simpleButton("Soccer ⚽" , "soccer")
+        
+           
             .padding(.bottom , 100)
+            
+           
 
             
             
@@ -59,9 +59,13 @@ struct ItemsMainPage: View {
                
                 Task{
                     if appState.isMuesumOpen{
-                        await dismissImmersiveSpace123()
+                       
                         
                         appState.isMuesumOpen = false
+                        selectedItem123.selectedItem = nil
+                        
+                        await dismissImmersiveSpace123()
+                        
                         
                     }
                 }

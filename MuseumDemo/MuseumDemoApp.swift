@@ -52,15 +52,9 @@ struct MuseumDemoApp: App {
             Seperate3DObject()
                 .environmentObject(selectedItem123)
                 .environmentObject(appState)
- 
-//            MuesumItems(Items: "Cat")
-//                .environmentObject(selectedItem123)
-//                .environmentObject(appState)
-//      
-               
         }
         .windowStyle(.volumetric)
-        .defaultSize(width : 1 , height : 0.6 , depth:  0.8 , in : .meters)
+        .defaultSize(width : 2 , height : 1 , depth:  1 , in : .meters)
 //        .environmentObject(selectedItem123)
 //        .environmentObject(appState)
     }

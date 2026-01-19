@@ -22,6 +22,9 @@ struct ContentView: View {
     let bgMainColor1 = Color(red: 227/255, green: 217/255, blue: 195/255)
     let bgMainColor2 = Color(red: 235/255, green: 221/255, blue: 190/255)
     let bgMainColor3 = Color(red: 179/255, green: 164/255, blue: 127/255)
+    
+    let btnBG =   Color(red: 0.380, green: 0.275, blue: 0.043)
+
 
 
     let headerTxtColor = Color(red: 102/255, green: 87/255, blue: 60/255)
@@ -88,6 +91,7 @@ struct ContentView: View {
                         }
                         
                     }
+                    
                     .hoverEffect()
                     .scaleEffect(tapping ? 0.9 : 1.2    )
                     .gesture(
@@ -103,6 +107,7 @@ struct ContentView: View {
                                     }
                                 })
                         )
+                    .background(btnBG)
                         
                     
                     
