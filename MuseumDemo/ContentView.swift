@@ -50,7 +50,8 @@ struct ContentView: View {
                 
                 VStack {
                     Text("Welcome to Vivekananda Museum ")
-                        .font(.largeTitle)
+                        .font(.system(size: width * 0.045))
+                        .fontWeight(.bold)
                         .foregroundColor(headerTxtColor)
                     
                     

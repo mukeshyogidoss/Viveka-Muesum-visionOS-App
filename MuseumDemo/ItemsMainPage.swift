@@ -33,14 +33,7 @@ struct ItemsMainPage: View {
     var body: some View {
         
         VStack{
-            
-//            Button("Cat 🐱"){
-//              
-//                    selectedItem123.selectedItem = "Cat"
-//                    openWindow123(id : "Seperate3DObject" )
-//               
-//            }
-            
+
 
             
             simpleButton("Cat 🐱" , "Cat")

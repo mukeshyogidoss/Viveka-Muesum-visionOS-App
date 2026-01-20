@@ -10,15 +10,27 @@ import RealityKit
 import RealityKitContent
 
 struct Muesum: View {
+    // State to hold the loaded Cat model
+      @State private var catModel: ModelEntity?
     var body: some View {
         RealityView{ content in
-            let realMuseum = OwnMuseum()
-            content.add(realMuseum!)
+            			
             
+            if let realMuseum = OwnMuseum(){
+                content.add(realMuseum)
+                
+            }
+            
+            if let immersiveContentEntity = try? await Entity(named: "Bear", in: realityKitContentBundle) {
+                content.add(immersiveContentEntity)
+
+                
+            }
         }
+    }
         
     }
-}
+
 
 private func OwnMuseum()-> Entity? {
     let outerSphere = MeshResource.generateSphere(radius: 20)
@@ -30,7 +42,7 @@ private func OwnMuseum()-> Entity? {
                     tint: UIColor(white: 1.5, alpha: 1.0), // brighten here
                    texture: .init(texture)
                   
-               )
+        )
     }
     catch{
         print("Failed to load Museum Image")
