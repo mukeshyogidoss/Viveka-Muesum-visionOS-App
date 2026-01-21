@@ -3,29 +3,43 @@
 //  MuseumDemo
 //
 //  Created by Intern on 07/01/26.
-//
+
 
 import SwiftUI
 import RealityKit
 import RealityKitContent
+import simd
+
 
 struct Muesum: View {
-    // State to hold the loaded Cat model
-      @State private var catModel: ModelEntity?
+    
+    @State private var catModel: ModelEntity?
     var body: some View {
         RealityView{ content in
-            			
+            let anchor = AnchorEntity()
             
             if let realMuseum = OwnMuseum(){
                 content.add(realMuseum)
-                
             }
             
-            if let immersiveContentEntity = try? await Entity(named: "Bear", in: realityKitContentBundle) {
-                content.add(immersiveContentEntity)
-
+            if let immersiveContentEntity = try? await Entity(
+                named: "Child Table", in: realityKitContentBundle
+            )
+            {
+                immersiveContentEntity.scale = SIMD3(repeating: 0.02)
                 
+                //Position Scale : [x, y, z]
+                immersiveContentEntity.position = [-7,-3,-10]
+                
+                
+                anchor.addChild(immersiveContentEntity)
             }
+            content.add(anchor)
+           
+               
+            
+            
+            
         }
     }
         
@@ -33,7 +47,7 @@ struct Muesum: View {
 
 
 private func OwnMuseum()-> Entity? {
-    let outerSphere = MeshResource.generateSphere(radius: 20)
+    let outerSphere = MeshResource.generateSphere(radius: 200)
     var museumMaterial = UnlitMaterial()
     
     do{
